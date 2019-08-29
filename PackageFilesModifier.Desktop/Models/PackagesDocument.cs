@@ -50,19 +50,6 @@ namespace PackageFilesModifier.Desktop.Models
             }
 
             RaisePropertyChanged(nameof(PackagesList));
-        }
-
-        private void LoadProjectFile()
-        {
-            FileInfo fi = new FileInfo(_originalPath);
-            var projFiles = fi.Directory.GetFiles("*.csproj");
-
-            if (projFiles.Length == 0) return;
-            if (projFiles.Length > 1) throw new Exception("More then one project file found in one project");
-            var projFile = projFiles[0];
-            var projXmlDoc = new XmlDocument();
-            projXmlDoc.Load(projFile.FullName);
-            this.Project = new ProjectDocument(projXmlDoc);
-        }
+        }       
     }
 }

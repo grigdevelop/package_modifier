@@ -14,9 +14,12 @@ namespace PackageFilesModifier.Desktop.Models
         public List<ProjectDocumentPackage> Packages { get; }
             = new List<ProjectDocumentPackage>();
 
-        public ProjectDocument(XmlDocument root)
+        public string OriginalPath { get; }
+
+        public ProjectDocument(XmlDocument root, string originalPath)
         {
             this._root = root;
+            this.OriginalPath = originalPath;
             LoadProjectDocumentPackages();
         }
 
