@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="PackageFilesModifier.Desktop.Views.AllPackagesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PackageFilesModifier.Desktop.Views"
+             xmlns:vm="clr-namespace:PackageFilesModifier.Desktop.ViewModels"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance vm:AllPackagesViewModel}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <ListView Grid.Column="0"
+                  ItemsSource="{Binding VersionedPackages, UpdateSourceTrigger=PropertyChanged, Mode=OneTime, NotifyOnSourceUpdated=True}"
+                  SelectedItem="{Binding SelectedVersionedPackage, UpdateSourceTrigger=PropertyChanged}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Package.Name}"/>
+                        <TextBlock Text=" | latest version: "/>
+                        <TextBlock Text="{Binding LatestVersion}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+        <ListView Grid.Column="1"
+                  ItemsSource="{Binding SelectedVersionedPackage.Versions, UpdateSourceTrigger=PropertyChanged}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Version}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackPanel Orientation="Vertical" Grid.Column="2">
+            <Button Content="Update selected to latest version" Command="{Binding RaiseUpdateSelectedToLatestVersion}"/>
+            <Button Content="Update all to latest version" Command="{Binding RaiseUpdateAllToLatestVersion}"/>
+            <Button Content="Save changes" Command="{Binding RaiseSaveChanges}"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>
