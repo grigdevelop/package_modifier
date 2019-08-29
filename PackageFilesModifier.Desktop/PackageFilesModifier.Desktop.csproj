@@ -93,6 +93,7 @@
     <Compile Include="Models\VersionedPackage.cs" />
     <Compile Include="ViewModels\AllPackagesViewModel.cs" />
     <Compile Include="ViewModels\DocumentScannerViewModel.cs" />
+    <Compile Include="ViewModels\ProjectFilesViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\AllPackagesView.xaml.cs">
       <DependentUpon>AllPackagesView.xaml</DependentUpon>

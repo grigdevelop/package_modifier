@@ -28,7 +28,7 @@ namespace PackageFilesModifier.Desktop.Models
 
             // first load project items, because package file should
             // have access to project one
-            LoadProjectFile();
+            //LoadProjectFile();
 
             LoadPackages();
             
@@ -41,10 +41,7 @@ namespace PackageFilesModifier.Desktop.Models
             foreach (XmlNode packageNode in _root.GetElementsByTagName("package"))
             {                               
                 var item = new PackageItemDocument(packageNode);
-
-                var projectPackageItem = Project.Packages.FirstOrDefault(x => x.Name == item.Name);
-                if (projectPackageItem != null) item.AttachProjectPackage(projectPackageItem);
-
+               
                 if (item.HasVersion)
                 {
                     PackagesList.Add(item);

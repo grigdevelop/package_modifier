@@ -11,9 +11,7 @@ namespace PackageFilesModifier.Desktop.Models
     public class PackageItemDocument : BindableBase, IEquatable<PackageItemDocument>
     {
         private readonly XmlNode _root;
-
-        public ProjectDocumentPackage ProjectPackage { get; private set; }
-
+     
         public string Name
         {
             get
@@ -31,11 +29,7 @@ namespace PackageFilesModifier.Desktop.Models
 
             set
             {
-                _root.Attributes["version"].Value = value;
-                if (ProjectPackage != null)
-                {
-                    ProjectPackage.Version = value;
-                }
+                _root.Attributes["version"].Value = value;              
                 RaisePropertyChanged();
             }
         }
@@ -43,13 +37,7 @@ namespace PackageFilesModifier.Desktop.Models
         public PackageItemDocument(XmlNode root)
         {
             this._root = root;
-        }
-
-        public void AttachProjectPackage(ProjectDocumentPackage projectPackage)
-        {
-            if (ProjectPackage != null) throw new Exception("ProjectPackages Attached more then one time");
-            this.ProjectPackage = projectPackage;
-        }
+        }      
 
         public bool HasVersion => _root.Attributes["version"] != null;
 
